@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rungle: Neon Evolution</title>
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Three.js Import Map -->
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+                "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <div id="game-container">
+        <!-- 2D Canvas (initially visible) -->
+        <canvas id="canvas-2d"></canvas>
+        <!-- 3D Container (Three.js appends here) -->
+        <div id="container-3d"></div>
+    </div>
+
+    <div id="ui-layer">
+        <div id="score-display" class="hud-panel">Data: 0</div>
+        <div id="health-display" class="hud-panel">Integrity: 100%</div>
+        <div id="mode-display" class="hud-text">PHASE 1: DEFENSE</div>
+
+        <!-- 3D Health Bar (Refined) -->
+        <div id="health-bar-container" class="hidden"
+            style="position: absolute; top: 80px; left: 20px; width: 200px; height: 10px; background: rgba(0,0,0,0.5); border: 1px solid rgba(0, 242, 255, 0.3);">
+            <div id="health-bar"
+                style="width: 100%; height: 100%; background: var(--primary-color); transition: width 0.3s; box-shadow: 0 0 10px var(--primary-color);">
+            </div>
+        </div>
+
+        <!-- Boss Health Bar -->
+        <div id="boss-ui" class="hidden"
+            style="position: absolute; top: 20px; left: 50%; transform: translateX(-50%); width: 400px; z-index: 101;">
+            <div
+                style="text-align: center; color: var(--secondary-color); font-size: 14px; margin-bottom: 5px; font-family: var(--font-ui); letter-spacing: 5px;">
+                ANOMALY DETECTED</div>
+            <div
+                style="width: 100%; height: 10px; background: rgba(0,0,0,0.7); border: 1px solid var(--secondary-color);">
+                <div id="boss-health-bar"
+                    style="width: 100%; height: 100%; background: var(--secondary-color); transition: width 0.3s; box-shadow: 0 0 15px var(--secondary-color);">
+                </div>
+            </div>
+        </div>
+
+        <!-- PowerUp Display -->
+        <div id="powerup-display" style="position: absolute; bottom: 80px; left: 50%; transform: translateX(-50%);">
+        </div>
+
+        <!-- Warp Flash Screen -->
+        <div id="warp-screen" class="overlay hidden"></div>
+
+        <!-- Start Screen -->
+        <div id="start-screen" class="overlay">
+            <h1>RUNGLE</h1>
+            <div class="instruction-grid">
+                <div class="instruction-card">
+                    <h3>PHASE 1: DEFENSE</h3>
+                    <p>ARROWS to Evade. SPACE to Purge.</p>
+                </div>
+                <div class="instruction-card">
+                    <h3>PHASE 2: EVOLUTION</h3>
+                    <p>W to Jump. LANES to Shift. SPACE to Fire.</p>
+                </div>
+            </div>
+            <p style="font-size: 14px; color: var(--primary-color);">RUNGLE LINK STABLE // TARGET: 2500</p>
+            <button id="start-btn">INITIATE BOOT SEQUENCE</button>
+        </div>
+
+        <!-- Game Over Screen -->
+        <div id="game-over-screen" class="overlay hidden">
+            <h1>SYSTEM FAILURE</h1>
+            <p>Final Data Recovered: <span id="final-score" style="color: var(--primary-color);">0</span> units</p>
+            <button id="restart-btn">REBOOT SYSTEM</button>
+        </div>
+
+        <!-- Pause Screen -->
+        <div id="pause-screen" class="overlay hidden">
+            <h1>PAUSED</h1>
+            <p>NEURAL LINK SUSPENDED</p>
+            <div style="display: flex; gap: 20px;">
+                <button id="resume-btn">RESUME</button>
+                <button id="quit-btn"
+                    style="border-color: var(--secondary-color); color: var(--secondary-color);">ABORT</button>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="game.js"></script>
+</body>
+
+</html>
